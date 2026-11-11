@@ -10,92 +10,202 @@
   <meta name="description" content="母亲体检结果分析、就诊优先级与随访建议。">
   <title>母亲体检结果分析与随访建议</title>
   <style>
-    :root { --ink:var(--pp-fg,#36333e); --muted:var(--pp-muted,#625c6c); --paper:var(--pp-page-bg,#f8f6f9); --surface:var(--pp-surface,#fff); --line:var(--pp-border,#d8d1dd); --accent:var(--pp-accent,#714877); --soft:var(--pp-surface-alt,#eee8f1); --danger:#8d3430; --danger-bg:#fff0ed; font-size:20px; color-scheme:light; }
+    :root {
+      --ink:var(--pp-fg,#24393e); --muted:var(--pp-muted,#53676b);
+      --paper:var(--pp-page-bg,#f1f5f5); --surface:var(--pp-surface,#fff);
+      --line:var(--pp-border,#dce5e4); --accent:var(--pp-accent,#73517d);
+      --soft:var(--pp-surface-alt,#f0eaf3); --danger:#873f35; --danger-bg:#fff3ef;
+      font-size:20px; color-scheme:light; font-synthesis:none;
+    }
     * { box-sizing:border-box; }
-    html { scroll-behavior:smooth; scroll-padding-top:5rem; }
-    body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.85; -webkit-text-size-adjust:100%; }
-    ::selection { background:#ded0e4; color:#482d50; }
-    a { color:var(--accent); text-underline-offset:.2em; overflow-wrap:anywhere; }
+    html { scroll-behavior:smooth; scroll-padding-top:5rem; scrollbar-color:var(--line) var(--paper); }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.8; -webkit-text-size-adjust:100%; }
+    ::selection { background:var(--soft); color:var(--accent); }
+    a { color:var(--accent); text-underline-offset:.22em; overflow-wrap:anywhere; }
     button,summary,a,input { -webkit-tap-highlight-color:transparent; }
-    :focus-visible { outline:3px solid var(--accent); outline-offset:5px; }
-    button { min-height:48px; padding:.35rem .7rem; border:1px solid var(--line); border-radius:8px; font:inherit; font-size:.85rem; color:var(--ink); background:var(--surface); cursor:pointer; }
-    button:hover { background:var(--soft); }
-    .wrap { max-width:1000px; margin:auto; padding:0 36px; }
-    .top { display:flex; align-items:center; justify-content:space-between; gap:20px; padding-top:22px; padding-bottom:22px; font-size:.85rem; }
-    .top p { margin:0; color:var(--muted); }
-    .tools { display:flex; gap:8px; flex-shrink:0; }
-    .hero { padding:36px 0 40px; border-top:1px solid var(--line); }
-    h1 { margin:0 0 22px; font-size:clamp(1.9rem,4.7vw,2.8rem); line-height:1.4; letter-spacing:-.025em; font-weight:700; text-wrap:balance; }
-    h1 span { color:var(--accent); }
-    .intro { max-width:42rem; margin:0; font-size:1.05rem; }
-    .lead { background:var(--soft); padding:22px 26px; margin-top:28px; border-radius:12px; }
-    .lead p { margin:0; }
-    .lead p+p { margin-top:8px; }
-    .meta,.fine { color:var(--muted); font-size:.8rem; }
-    nav { position:sticky; top:0; z-index:3; background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
-    .nav { display:flex; gap:28px; overflow-x:auto; padding-top:10px; padding-bottom:10px; }
-    .nav a { white-space:nowrap; font-size:.85rem; text-decoration:none; min-height:36px; display:flex; align-items:center; }
-    main { padding-bottom:48px; }
-    section { padding-top:46px; scroll-margin-top:1rem; }
-    h2 { margin:0 0 16px; font-size:1.45rem; line-height:1.5; letter-spacing:-.02em; }
-    h3 { margin:0 0 9px; font-size:1.08rem; }
-    p { margin:0 0 14px; }
-    .actions { border-top:1px solid var(--line); }
-    .action { display:grid; grid-template-columns:28px 1fr; gap:16px; padding:23px 0; border-bottom:1px solid var(--line); }
+    :focus-visible { outline:3px solid var(--accent); outline-offset:4px; }
+    button { min-height:46px; padding:10px 14px; border:1px solid var(--line); border-radius:10px; font:inherit; font-size:.8rem; line-height:1.4; color:var(--ink); background:var(--surface); cursor:pointer; }
+    button:hover { border-color:var(--accent); background:var(--soft); }
+    button:active { transform:translateY(1px); }
+    svg { display:block; width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+    .wrap { width:100%; max-width:1180px; margin:auto; padding:0 40px; }
+    .top { display:flex; align-items:center; justify-content:space-between; gap:22px; padding-top:24px; padding-bottom:24px; }
+    .top p { margin:0; color:var(--muted); font-size:.75rem; line-height:1.7; }
+    .top p strong { color:var(--ink); font-size:.9rem; font-weight:650; }
+    .tools { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+    .tools button { display:flex; align-items:center; justify-content:center; gap:8px; }
+    .hero { display:grid; grid-template-columns:1.04fr 1fr; column-gap:52px; align-items:start; padding:24px 0 42px; }
+    h1 { grid-column:1; margin:0 0 16px; font-size:clamp(1.65rem,3vw,2.15rem); line-height:1.4; letter-spacing:-.025em; font-weight:700; text-wrap:balance; }
+    h1 span { color:inherit; }
+    .intro { grid-column:1; max-width:32rem; margin:0; color:var(--muted); font-size:.95rem; line-height:1.8; }
+    .lead { grid-column:2; grid-row:1 / 4; background:var(--soft); padding:24px 28px; border-radius:16px; }
+    .lead p { margin:0; font-size:.9rem; line-height:1.85; }
+    .lead p+p { margin-top:12px; }
+    .lead p:first-child strong { display:flex; align-items:center; gap:10px; font-size:.95rem; color:var(--accent); }
+    .lead p:first-child strong::before { content:""; width:7px; height:7px; border-radius:50%; background:currentColor; }
+    .lead p:last-child:not(:nth-child(2)) { padding-top:12px; border-top:1px solid var(--line); }
+    .overview { grid-column:1; border:0; margin:0; }
+    .overview>summary { width:fit-content; min-height:44px; padding:8px 28px 8px 0; color:var(--accent); font-size:.8rem; font-weight:600; }
+    .overview>summary .chevron { top:13px; width:17px; height:17px; }
+    .overview .intro { margin-top:8px; font-size:.85rem; }
+    .overview .meta { font-size:.73rem; }
+    .meta,.fine { color:var(--muted); font-size:.78rem; line-height:1.8; }
+    .meta { grid-column:1; }
+    .report-layout { display:grid; grid-template-columns:185px minmax(0,1fr); column-gap:36px; max-width:1180px; margin:auto; padding:0 40px 44px; align-items:start; }
+    nav { grid-column:1; grid-row:1; position:sticky; top:28px; padding-top:14px; }
+    .nav { display:flex; flex-direction:column; gap:7px; margin:0; padding:0; }
+    .nav a { display:flex; align-items:center; gap:10px; min-height:48px; padding:10px 14px; border-radius:10px; color:var(--muted); font-size:.85rem; line-height:1.5; text-decoration:none; white-space:nowrap; }
+    .nav a:hover { color:var(--accent); background:var(--soft); }
+    .nav a[aria-current=location] { background:var(--soft); color:var(--accent); font-weight:650; }
+    .nav a::before { content:""; width:5px; height:5px; border-radius:50%; background:currentColor; opacity:.4; flex-shrink:0; }
+    .nav a[aria-current=location]::before { opacity:1; }
+    main.wrap { grid-column:2; grid-row:1; max-width:none; min-width:0; padding:0 36px 36px; border-radius:16px; background:var(--surface); }
+    section { padding-top:34px; scroll-margin-top:1rem; }
+    section+section { margin-top:8px; }
+    h2 { margin:0 0 14px; font-size:1.3rem; line-height:1.5; letter-spacing:-.02em; }
+    h3 { margin:0 0 10px; font-size:1.02rem; line-height:1.6; }
+    p { margin:0 0 16px; }
+    strong { font-weight:650; }
+    .actions { margin-top:20px; }
+    .action { display:grid; grid-template-columns:28px minmax(0,1fr); gap:14px; padding:26px 0; border-top:1px solid var(--line); }
+    .action:last-child { border-bottom:1px solid var(--line); }
     input[type=checkbox] { width:25px; height:25px; margin:7px 0 0; accent-color:var(--accent); cursor:pointer; }
     .action label { cursor:pointer; display:block; }
-    .action label strong { display:block; font-size:1.08rem; }
-    .action p { margin:8px 0 0; }
-    .when { display:inline-block; color:var(--accent); font-size:.85rem; font-weight:600; margin-bottom:4px; }
-    .urgent { border:1px solid #d5aca4; background:var(--danger-bg); color:#642522; border-radius:12px; padding:23px 26px; margin-top:26px; }
+    .action label strong { display:block; margin-top:9px; font-size:1.05rem; line-height:1.65; }
+    .action p { margin:12px 0 0; }
+    .when { display:inline-block; padding:3px 9px; border-radius:6px; color:var(--accent); background:var(--soft); font-size:.75rem; font-weight:600; line-height:1.8; }
+    .action:has(input:checked) label strong { color:var(--muted); }
+    .urgent { border:1px solid #e7c9bf; background:var(--danger-bg); color:#67382f; border-radius:12px; padding:22px 24px; margin-top:24px; }
     .urgent h3 { color:var(--danger); }
+    .urgent p { font-size:.9rem; }
     .urgent p:last-child { margin-bottom:0; }
-    .topics { border-top:1px solid var(--line); }
+    .section-heading { display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:8px 20px; margin-bottom:10px; }
+    .section-heading h2 { margin:0; }
+    .toggle-all { border:0; border-radius:6px; color:var(--accent); font-size:.75rem; padding:10px 0; background:transparent; min-height:44px; }
+    .toggle-all:hover { background:transparent; text-decoration:underline; text-underline-offset:.25em; }
+    .topics { padding-top:8px; }
     details { border-bottom:1px solid var(--line); }
-    summary { padding:21px 30px 21px 0; cursor:pointer; position:relative; list-style:none; }
+    summary { display:block; padding:22px 36px 22px 0; cursor:pointer; position:relative; list-style:none; }
     summary::-webkit-details-marker { display:none; }
-    summary::after { content:"+"; position:absolute; right:4px; top:22px; color:var(--accent); font-size:1.25rem; line-height:1.2; }
-    details[open]>summary::after { content:"−"; }
-    summary strong { display:block; font-size:1.08rem; }
-    summary small { display:block; font-size:.85rem; font-weight:400; color:var(--muted); line-height:1.7; margin-top:5px; }
-    .detail { padding:0 0 20px; max-width:45rem; }
+    .chevron { position:absolute; right:0; top:27px; width:20px; height:20px; color:var(--muted); transition:transform .18s ease; }
+    details[open]>summary .chevron { transform:rotate(180deg); color:var(--accent); }
+    summary:hover strong { color:var(--accent); }
+    summary strong { display:block; font-size:1.02rem; line-height:1.7; }
+    summary small { display:block; font-size:.8rem; font-weight:400; color:var(--muted); line-height:1.8; margin-top:7px; font-variant-numeric:tabular-nums; }
+    .detail { padding:0 0 23px; }
     .detail p:last-child { margin-bottom:0; }
-    .source { color:var(--muted); font-size:.78rem; }
-    .habit { display:grid; grid-template-columns:100px 1fr; gap:16px; padding:17px 0; border-bottom:1px solid var(--line); }
+    .source { color:var(--muted); font-size:.75rem; line-height:1.85; padding-top:5px; }
+    .habit { display:grid; grid-template-columns:90px minmax(0,1fr); gap:20px; padding:22px 0; border-bottom:1px solid var(--line); }
     .habit p { margin:0; }
-    .habit strong { color:var(--accent); }
-    ol,ul { padding-left:1.3rem; margin:12px 0; }
+    .habit strong { color:var(--accent); font-size:.9rem; }
+    ol,ul { padding-left:1.25rem; margin:18px 0; }
     li+li { margin-top:10px; }
-    .schedule { margin:0; }
-    .schedule>div { padding:18px 0; border-bottom:1px solid var(--line); display:grid; grid-template-columns:165px 1fr; gap:20px; }
-    dt { font-weight:600; color:var(--accent); }
+    .schedule { margin:22px 0 0 5px; padding-left:25px; border-left:1px solid var(--line); }
+    .schedule>div { position:relative; padding:0 0 25px; }
+    .schedule>div:last-child { padding-bottom:0; }
+    .schedule>div::before { content:""; position:absolute; left:-31px; top:8px; width:11px; height:11px; background:var(--accent); border:3px solid var(--surface); border-radius:50%; box-shadow:0 0 0 1px var(--accent); }
+    dt { margin-bottom:8px; font-weight:650; color:var(--accent); font-size:.9rem; }
     dd { margin:0; }
-    .doctor { background:var(--soft); padding:26px; border-radius:12px; }
+    .doctor { background:var(--soft); padding:25px; border-radius:12px; }
+    .doctor p { font-variant-numeric:tabular-nums; }
     .doctor p:last-child { margin-bottom:0; }
-    footer { border-top:1px solid var(--line); padding:26px 0 40px; color:var(--muted); font-size:.8rem; }
-    footer summary strong { font-size:.9rem; }
+    footer.wrap { grid-column:2; max-width:none; min-width:0; margin-top:20px; padding:0 10px; color:var(--muted); font-size:.78rem; }
+    footer summary strong { font-size:.85rem; }
     footer li { overflow-wrap:anywhere; }
-    footer details { margin-bottom:22px; }
-    .back { display:inline-block; padding:10px 0; }
+    footer details { margin-bottom:20px; }
+    .back { display:inline-flex; align-items:center; gap:7px; padding:8px 0; min-height:44px; text-decoration:none; font-size:.8rem; }
+    .back svg { width:17px; height:17px; }
     .large { font-size:24px; }
-    @media(max-width:620px) { .wrap { padding-left:22px; padding-right:22px; } .top { align-items:flex-start; gap:12px; } .top p { max-width:10em; } .tools { flex-direction:column; gap:5px; } .hero { padding-top:24px; } .lead,.urgent,.doctor { padding:20px; } .nav { gap:24px; } .habit { grid-template-columns:1fr; gap:4px; } .schedule>div { grid-template-columns:1fr; gap:5px; } section { padding-top:36px; } }
-    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
-    @media print { :root,.large { font-size:12pt; } body { background:white; color:#111; } .wrap { max-width:none; padding:0; } .tools,nav,.back { display:none; } .hero { padding:10px 0 20px; } h1 { font-size:26pt; } section { padding-top:20px; } details,.action,.habit,.schedule>div,.urgent { break-inside:avoid; } summary { padding:12px 0; } summary::after { display:none; } .urgent { background:white; } a { color:inherit; } }
+    @media(max-width:1000px) {
+      .wrap { padding:0 28px; }
+      .top { padding-top:22px; padding-bottom:22px; }
+      .hero { column-gap:30px; }
+      .report-layout { grid-template-columns:155px minmax(0,1fr); gap:24px; padding:0 28px 36px; }
+      main.wrap { padding:0 28px 30px; }
+      .nav a { padding-left:10px; padding-right:10px; font-size:.8rem; }
+    }
+    @media(max-width:760px) {
+      html { scroll-padding-top:4.5rem; }
+      .wrap { padding-left:22px; padding-right:22px; }
+      .top { gap:14px; padding-top:19px; padding-bottom:19px; }
+      .top p { font-size:.75rem; }
+      .top p strong { font-size:.8rem; }
+      .tools { gap:6px; }
+      .tools button { min-height:44px; padding:10px; gap:6px; font-size:.75rem; }
+      .tools svg { width:20px; height:20px; }
+      .print-label { display:none; }
+      .hero { display:block; padding:12px 0 26px; }
+      h1 { margin-bottom:12px; font-size:1.65rem; line-height:1.4; }
+      .intro { font-size:.9rem; line-height:1.8; }
+      .lead { padding:18px 20px; margin-top:20px; }
+      .lead p { font-size:.85rem; line-height:1.8; }
+      .lead p+p { margin-top:10px; }
+      .lead p:first-child strong { font-size:.85rem; }
+      .meta { font-size:.7rem; }
+      .report-layout { display:block; padding:0 0 32px; }
+      nav { top:0; padding:7px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--surface); z-index:5; }
+      .nav { flex-direction:row; gap:4px; overflow-x:auto; padding:0 16px; scrollbar-width:thin; scroll-padding-inline:16px; }
+      .nav a { flex-shrink:0; min-height:43px; padding:10px 12px; font-size:.75rem; border-radius:8px; }
+      .nav a::before { display:none; }
+      main.wrap { margin-top:16px; padding:0 22px 28px; border-radius:0; }
+      section { padding-top:28px; }
+      h2 { font-size:1.2rem; }
+      .action { padding:23px 0; gap:12px; }
+      .action label strong { font-size:1rem; }
+      .when { font-size:.7rem; }
+      .action p { font-size:.95rem; line-height:1.85; }
+      .urgent { padding:18px; }
+      .urgent p { font-size:.85rem; }
+      .habit { grid-template-columns:1fr; gap:7px; }
+      .habit strong { font-size:.85rem; }
+      .doctor { padding:20px; }
+      footer.wrap { margin-top:12px; padding:0 22px; }
+    }
+    @media(max-width:359px) {
+      .wrap { padding-left:18px; padding-right:18px; }
+      .top { gap:9px; }
+      .tools button { padding:9px; }
+      .tools #font svg { display:none; }
+      .top p strong { font-size:.76rem; }
+      main.wrap,footer.wrap { padding-left:18px; padding-right:18px; }
+    }
+    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { transition:none!important; } }
+    @media print {
+      :root,.large { font-size:12pt; }
+      body { background:white; color:#111; }
+      .wrap,.report-layout { max-width:none; padding:0; }
+      .tools,nav,.back,.toggle-all { display:none; }
+      .top { padding:0 0 12px; }
+      .hero,.report-layout { display:block; }
+      .hero { padding:0 0 20px; }
+      h1 { font-size:24pt; }
+      .lead { margin-top:15px; padding:15px; }
+      main.wrap,footer.wrap { padding:0; background:white; margin:0; }
+      section { padding-top:20px; }
+      details,.action,.habit,.schedule>div,.urgent { break-inside:avoid; }
+      summary { padding:12px 0; }
+      .chevron { display:none; }
+      .urgent { background:white; }
+      a { color:inherit; }
+    }
   </style>
 </head>
 <body>
   <header class="wrap top" id="top">
-    <p>母亲体检报告解读<br>59 岁 · 2026 年 10 月 30 日体检</p>
-    <div class="tools"><button id="font" type="button" aria-pressed="false">放大字号</button><button id="print" type="button">打印 / 存为 PDF</button></div>
+    <p><strong>母亲体检报告解读</strong><br>59 岁 · 2026-10-30 体检</p>
+    <div class="tools"><button id="font" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 18 5-12 5 12M5 14h6m4 4 3-8 3 8m-5-3h4"/></svg><span class="font-label">放大字号</span></button><button id="print" type="button" aria-label="打印或存为 PDF" title="打印或存为 PDF"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8V3h10v5M7 16H4V9h16v7h-3M7 13h10v8H7zM17 11h.01"/></svg><span class="print-label">打印 / 存为 PDF</span></button></div>
   </header>
   <div class="wrap">
     <div class="hero">
       <h1>体检结果分析<br><span>与后续就诊建议</span></h1>
+      <details class="overview"><summary>报告概述与整理说明<svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
       <p class="intro">本次体检需重点复核甲状腺功能、肝功能及下肢血管筛查异常，并结合症状和现用药物明确后续处理。其他发现按计划随访。</p>
-      <div class="lead"><p><strong>优先处理事项</strong></p><p>内分泌科确认甲状腺功能；消化内科复核肝功能和用药；心内科或血管外科复测下肢血管指标。</p></div>
       <p class="meta" style="margin:16px 0 0">整理于 2026-11-10。以下安排以“尚未复查”为前提；已经复查过的项目，按新结果和医生意见更新。</p>
+      </details>
+      <div class="lead"><p><strong>优先处理事项</strong></p><p>内分泌科确认甲状腺功能；消化内科复核肝功能和用药；心内科或血管外科复测下肢血管指标。</p></div>
     </div>
   </div>
+  <div class="report-layout">
   <nav aria-label="页面目录"><div class="wrap nav"><a href="#todo">就诊优先级</a><a href="#explain">结果解读</a><a href="#daily">日常管理</a><a href="#followup">复查安排</a><a href="#doctor">就诊摘要</a></div></nav>
   <main class="wrap">
     <section id="todo">
@@ -113,16 +223,16 @@
       </aside>
     </section>
     <section id="explain">
-      <h2>异常结果与临床意义</h2>
+      <div class="section-heading"><h2>异常结果与临床意义</h2><button class="toggle-all" id="toggle-all" type="button">展开全部解释</button></div>
       <p class="fine">展开各项可查看原始结果、临床意义与后续建议。</p>
       <div class="topics">
-        <details open><summary><strong>甲状腺：复核功能异常，明确病因及治疗指征</strong><small>TSH 6.35，FT4 正常；超声提示弥漫性改变</small></summary><div class="detail"><p>本次表现为促甲状腺激素升高，游离甲状腺素仍在参考范围内。需要复查 TSH、FT4，并考虑查甲状腺过氧化物酶抗体（TPOAb）。</p><p>超声改变可能见于桥本甲状腺炎，但<strong>仅凭超声及单次 TSH 结果不能确诊桥本甲状腺炎，也不能确定需长期药物治疗</strong>。通常会在约 3 个月复核，具体由内分泌科安排；若症状明显或结果变化，可提前。<a href="#s1">[1]</a></p><p>就诊时需说明是否存在畏寒、便秘、乏力、体重及睡眠情绪变化。上述症状可能涉及多种原因，不应全部归因于甲状腺异常。不宜自行服用优甲乐、海藻碘片或大剂量硒。</p><p class="source">原报告：PDF 第 16、18 页；对话约 10:20–13:50。</p></div></details>
-        <details open><summary><strong>肝功能与脂肪肝：评估病因并开展代谢管理</strong><small>ALT 49 U/L · 轻度脂肪肝 · BMI 26.9</small></summary><div class="detail"><p>ALT 约为本次上限的 <strong>1.2 倍</strong>，属于轻度升高；AST 33、胆红素正常，均在本次参考范围内。单项 ALT 异常不足以判断肝损伤严重程度，也不能据此确定药物性肝损伤。</p><p>体重 <strong>65.1 kg</strong>，结合超重和脂肪肝，代谢因素可能参与；医生还会结合饮酒、药物和既往肝炎检查等排查。超声提示“轻度脂肪肝”，但不能单独据此判断肝纤维化情况，可由医生评估进一步检查的必要性。</p><p>建议与医生商定在约 <strong>2–4 周</strong>复查肝功能；复查前保持正常饮食，避免短期过度节食。逐步减重有助于改善脂肪肝，可将 <strong>3–6 个月缓慢减约 2–3 kg</strong> 作为与医生讨论的初步目标，避免过度节食或快速减重。<a href="#s3">[3]</a></p><p class="source">原报告：PDF 第 8、14–15、17 页；对话约 11:00–13:40。2–4 周为本页建议的门诊讨论时间，并非报告已下达的检查医嘱。</p></div></details>
-        <details><summary><strong>血管筛查：规范复测 ABI 及双臂血压</strong><small>ABI 右 0.82、左 0.80；筛查单写“需要重新检查”</small></summary><div class="detail"><p>ABI 为踝部与上臂收缩压的比值，规范检查时 <strong>≤0.90 属于异常范围</strong>。本次为体检筛查，复测时需要注意袖带、操作、血流波形和双侧手臂压差，必要时做下肢动脉超声。<a href="#s2">[2]</a></p><p>就诊时需说明是否存在行走后小腿酸痛且休息后缓解、足部发凉、足部伤口愈合延迟，或单侧上肢易酸等情况。无相关症状时，仍需复核异常筛查结果。</p><p>颈动脉原文是<strong>“内-中膜毛糙”</strong>，没有明确报告斑块或狭窄，不足以据此认定存在严重血管狭窄或闭塞。总胆固醇 <strong>5.40</strong>、LDL-C <strong>2.89 mmol/L</strong>，是否需要降脂药取决于整体风险；若下肢动脉病变确认，方案可能改变。不宜自行服用阿司匹林或他汀类药物。</p><p class="source">原报告：PDF 第 15、18、28–30 页。附件记录右臂 95/62、左臂 125/76 mmHg；同次体检一般检查血压 97/69 mmHg。此项在录音中未充分讨论。</p></div></details>
-        <details><summary><strong>心脏：舒张功能欠佳，收缩功能保留</strong><small>舒张功能欠佳 · 射血分数 64% · 心电图未见明显异常</small></summary><div class="detail"><p>心脏舒张期为心室舒张与血液充盈的阶段。舒张功能变化可能与年龄、血压或其他心脏情况有关，需结合症状评估；<strong>不能仅凭该项诊断心力衰竭，也不宜简单归因于活动不足。</strong></p><p>如存在活动后气短、胸闷、平卧时呼吸不畅或踝部水肿，应向心血管内科说明，可与血管指标复测一并评估。本次部分血压读数偏低，如反复出现头晕或站立时眼前发黑，需记录并就诊，不应参照他人的降压方案自行用药。</p><p class="source">原报告：PDF 第 8、17–19 页；对话约 10:20–11:10。</p></div></details>
-        <details><summary><strong>肾囊肿：明确形态并制定随访方案</strong><small>左肾多个无回声区，较大约 38×35 mm</small></summary><div class="detail"><p>报告考虑左肾囊肿。若医生确认是单纯性囊肿且没有症状，通常无需治疗；是否处理取决于形态、症状及生长情况，<strong>不应仅以达到 5 cm 作为手术判断依据</strong>。<a href="#s5">[5]</a></p><p>本次肌酐 57 μmol/L，尿蛋白、潜血均阴性。可先按原报告在 <strong>3–6 个月</strong>复查超声，并请医生确认是否为单纯性囊肿、之后是否仍需随访。有腰痛、发热或血尿时提前就诊。</p><p class="source">原报告：PDF 第 6、12、15、17 页。</p></div></details>
-        <details><summary><strong>骨量减少：评估骨折风险并加强骨骼健康管理</strong><small>右前臂骨密度 T 值 −1.3</small></summary><div class="detail"><p>本次提示<strong>骨量减少</strong>，不等于已经确诊骨质疏松。应结合既往跌倒及骨折史、身高变化和长期用药情况，由医生评估腰椎、髋部 DXA 检查及骨折风险评估的必要性。</p><p>饮食中适量摄入奶制品、豆制品、鱼、蛋及蛋白质。钙剂和维生素 D 的适用性及剂量需由医生结合饮食和检查结果确定。同时采取防滑鞋、夜间照明等防跌倒措施，避免自行大剂量补充营养制剂。</p><p class="source">原报告：PDF 第 6、19、31 页。</p></div></details>
-        <details><summary><strong>其他随访项目：子宫肌瘤、乳腺及视力</strong><small>子宫内约 10×8 mm 低回声区，内膜 4 mm</small></summary><div class="detail"><p><strong>妇科：</strong>影像考虑约 1 cm 子宫肌瘤。没有出血或其他不适时，可按妇科建议随访。<strong>绝经后出血均需评估，不能因内膜厚度为 4 mm 而省略检查。</strong>双侧卵巢“显示不清”也不等于已经完整排除病变；有持续腹胀、盆腔痛等情况应告诉医生。<a href="#s6">[6]</a></p><p><strong>乳腺：</strong>超声主要描述组织萎缩变薄，属于常见年龄相关变化。仍需按年龄和个人风险进行乳腺筛查；新发现肿块、乳头血性溢液或皮肤变化，应及时就诊。</p><p><strong>视力：</strong>视力下降可至眼科验光，并检查晶状体和眼底，以评估可干预的原因。</p><p class="source">原报告：PDF 第 7、9、17–18 页；对话约 13:55–结束。</p></div></details>
+        <details open><summary><strong>甲状腺：复核功能异常，明确病因及治疗指征</strong><small>TSH 6.35，FT4 正常；超声提示弥漫性改变</small><svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="detail"><p>本次表现为促甲状腺激素升高，游离甲状腺素仍在参考范围内。需要复查 TSH、FT4，并考虑查甲状腺过氧化物酶抗体（TPOAb）。</p><p>超声改变可能见于桥本甲状腺炎，但<strong>仅凭超声及单次 TSH 结果不能确诊桥本甲状腺炎，也不能确定需长期药物治疗</strong>。通常会在约 3 个月复核，具体由内分泌科安排；若症状明显或结果变化，可提前。<a href="#s1">[1]</a></p><p>就诊时需说明是否存在畏寒、便秘、乏力、体重及睡眠情绪变化。上述症状可能涉及多种原因，不应全部归因于甲状腺异常。不宜自行服用优甲乐、海藻碘片或大剂量硒。</p><p class="source">原报告：PDF 第 16、18 页；对话约 10:20–13:50。</p></div></details>
+        <details open><summary><strong>肝功能与脂肪肝：评估病因并开展代谢管理</strong><small>ALT 49 U/L · 轻度脂肪肝 · BMI 26.9</small><svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="detail"><p>ALT 约为本次上限的 <strong>1.2 倍</strong>，属于轻度升高；AST 33、胆红素正常，均在本次参考范围内。单项 ALT 异常不足以判断肝损伤严重程度，也不能据此确定药物性肝损伤。</p><p>体重 <strong>65.1 kg</strong>，结合超重和脂肪肝，代谢因素可能参与；医生还会结合饮酒、药物和既往肝炎检查等排查。超声提示“轻度脂肪肝”，但不能单独据此判断肝纤维化情况，可由医生评估进一步检查的必要性。</p><p>建议与医生商定在约 <strong>2–4 周</strong>复查肝功能；复查前保持正常饮食，避免短期过度节食。逐步减重有助于改善脂肪肝，可将 <strong>3–6 个月缓慢减约 2–3 kg</strong> 作为与医生讨论的初步目标，避免过度节食或快速减重。<a href="#s3">[3]</a></p><p class="source">原报告：PDF 第 8、14–15、17 页；对话约 11:00–13:40。2–4 周为本页建议的门诊讨论时间，并非报告已下达的检查医嘱。</p></div></details>
+        <details><summary><strong>血管筛查：规范复测 ABI 及双臂血压</strong><small>ABI 右 0.82、左 0.80；筛查单写“需要重新检查”</small><svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="detail"><p>ABI 为踝部与上臂收缩压的比值，规范检查时 <strong>≤0.90 属于异常范围</strong>。本次为体检筛查，复测时需要注意袖带、操作、血流波形和双侧手臂压差，必要时做下肢动脉超声。<a href="#s2">[2]</a></p><p>就诊时需说明是否存在行走后小腿酸痛且休息后缓解、足部发凉、足部伤口愈合延迟，或单侧上肢易酸等情况。无相关症状时，仍需复核异常筛查结果。</p><p>颈动脉原文是<strong>“内-中膜毛糙”</strong>，没有明确报告斑块或狭窄，不足以据此认定存在严重血管狭窄或闭塞。总胆固醇 <strong>5.40</strong>、LDL-C <strong>2.89 mmol/L</strong>，是否需要降脂药取决于整体风险；若下肢动脉病变确认，方案可能改变。不宜自行服用阿司匹林或他汀类药物。</p><p class="source">原报告：PDF 第 15、18、28–30 页。附件记录右臂 95/62、左臂 125/76 mmHg；同次体检一般检查血压 97/69 mmHg。此项在录音中未充分讨论。</p></div></details>
+        <details><summary><strong>心脏：舒张功能欠佳，收缩功能保留</strong><small>舒张功能欠佳 · 射血分数 64% · 心电图未见明显异常</small><svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="detail"><p>心脏舒张期为心室舒张与血液充盈的阶段。舒张功能变化可能与年龄、血压或其他心脏情况有关，需结合症状评估；<strong>不能仅凭该项诊断心力衰竭，也不宜简单归因于活动不足。</strong></p><p>如存在活动后气短、胸闷、平卧时呼吸不畅或踝部水肿，应向心血管内科说明，可与血管指标复测一并评估。本次部分血压读数偏低，如反复出现头晕或站立时眼前发黑，需记录并就诊，不应参照他人的降压方案自行用药。</p><p class="source">原报告：PDF 第 8、17–19 页；对话约 10:20–11:10。</p></div></details>
+        <details><summary><strong>肾囊肿：明确形态并制定随访方案</strong><small>左肾多个无回声区，较大约 38×35 mm</small><svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="detail"><p>报告考虑左肾囊肿。若医生确认是单纯性囊肿且没有症状，通常无需治疗；是否处理取决于形态、症状及生长情况，<strong>不应仅以达到 5 cm 作为手术判断依据</strong>。<a href="#s5">[5]</a></p><p>本次肌酐 57 μmol/L，尿蛋白、潜血均阴性。可先按原报告在 <strong>3–6 个月</strong>复查超声，并请医生确认是否为单纯性囊肿、之后是否仍需随访。有腰痛、发热或血尿时提前就诊。</p><p class="source">原报告：PDF 第 6、12、15、17 页。</p></div></details>
+        <details><summary><strong>骨量减少：评估骨折风险并加强骨骼健康管理</strong><small>右前臂骨密度 T 值 −1.3</small><svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="detail"><p>本次提示<strong>骨量减少</strong>，不等于已经确诊骨质疏松。应结合既往跌倒及骨折史、身高变化和长期用药情况，由医生评估腰椎、髋部 DXA 检查及骨折风险评估的必要性。</p><p>饮食中适量摄入奶制品、豆制品、鱼、蛋及蛋白质。钙剂和维生素 D 的适用性及剂量需由医生结合饮食和检查结果确定。同时采取防滑鞋、夜间照明等防跌倒措施，避免自行大剂量补充营养制剂。</p><p class="source">原报告：PDF 第 6、19、31 页。</p></div></details>
+        <details><summary><strong>其他随访项目：子宫肌瘤、乳腺及视力</strong><small>子宫内约 10×8 mm 低回声区，内膜 4 mm</small><svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="detail"><p><strong>妇科：</strong>影像考虑约 1 cm 子宫肌瘤。没有出血或其他不适时，可按妇科建议随访。<strong>绝经后出血均需评估，不能因内膜厚度为 4 mm 而省略检查。</strong>双侧卵巢“显示不清”也不等于已经完整排除病变；有持续腹胀、盆腔痛等情况应告诉医生。<a href="#s6">[6]</a></p><p><strong>乳腺：</strong>超声主要描述组织萎缩变薄，属于常见年龄相关变化。仍需按年龄和个人风险进行乳腺筛查；新发现肿块、乳头血性溢液或皮肤变化，应及时就诊。</p><p><strong>视力：</strong>视力下降可至眼科验光，并检查晶状体和眼底，以评估可干预的原因。</p><p class="source">原报告：PDF 第 7、9、17–18 页；对话约 13:55–结束。</p></div></details>
       </div>
     </section>
     <section id="daily">
@@ -148,18 +258,51 @@
     </section>
   </main>
   <footer class="wrap">
-    <details><summary><strong>依据、录音核对与适用范围</strong><small>供家属和接诊医生核对</small></summary><div class="detail"><p>整理依据：母亲 2026-10-30 的 31 页体检 PDF，以及《分析录音.txt》中约 10:00 至结束的咨询内容。页码采用 PDF 实际页序，附件超过正文所标的 26 页。年龄以报告的 59 岁为准。</p><p>录音提到正在长期服药，但未提供药名，不能断定 ALT 升高由药物引起。TSH 轻度升高且 FT4 正常，需要确认是否持续异常；不能仅凭超声确诊桥本。ABI 和双臂压差来自原始附件，是本页补充的重要复核事项。卵巢未显示清楚不等于已排除所有病变。</p><ol><li id="s1"><a href="https://www.nice.org.uk/guidance/ng145/chapter/Recommendations" target="_blank" rel="noopener noreferrer">NICE NG145：甲状腺疾病评估与治疗</a>，特别是 1.5 节。TSH、FT4、抗体与症状共同决定是否治疗。</li><li id="s2"><a href="https://www.jacc.org/doi/10.1016/j.jacc.2024.02.013" target="_blank" rel="noopener noreferrer">2024 ACC/AHA 下肢外周动脉疾病指南</a>：ABI≤0.90 为异常范围，应结合规范检查与临床表现。</li><li id="s3"><a href="https://www.niddk.nih.gov/health-information/liver-disease/nafld-nash/treatment" target="_blank" rel="noopener noreferrer">NIDDK：脂肪肝的治疗与逐步减重</a>。本页的 2–3 kg 为温和起步目标，不代表个人最终减重处方。</li><li id="s4"><a href="https://www.nhs.uk/medicines/antidepressants/" target="_blank" rel="noopener noreferrer">NHS：抗抑郁药用药及停药注意事项</a>。不可突然自行停用；需要调整时联系原开药医生。</li><li id="s5"><a href="https://www.niddk.nih.gov/health-information/kidney-disease/simple-kidney-cysts" target="_blank" rel="noopener noreferrer">NIDDK：单纯性肾囊肿</a>。</li><li id="s6"><a href="https://www.acog.org/news/news-releases/2026/04/acog-publishes-updated-guidance-evaluation-postmenopausal-bleeding" target="_blank" rel="noopener noreferrer">ACOG 2026：绝经后出血的评估更新</a>。出血需及时评估，不能仅依据内膜厚度排除病变。</li></ol><p>资料核对日期：2026-11-10。本页用于解释和准备就诊，不作确诊或处方；时间表是结合报告整理的建议，症状和新结果可改变安排。正文、样式和功能均在此文件内，阅读不需要联网；参考链接联网后可打开。</p></div></details>
+    <details><summary><strong>依据、录音核对与适用范围</strong><small>供家属和接诊医生核对</small><svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="detail"><p>整理依据：母亲 2026-10-30 的 31 页体检 PDF，以及《分析录音.txt》中约 10:00 至结束的咨询内容。页码采用 PDF 实际页序，附件超过正文所标的 26 页。年龄以报告的 59 岁为准。</p><p>录音提到正在长期服药，但未提供药名，不能断定 ALT 升高由药物引起。TSH 轻度升高且 FT4 正常，需要确认是否持续异常；不能仅凭超声确诊桥本。ABI 和双臂压差来自原始附件，是本页补充的重要复核事项。卵巢未显示清楚不等于已排除所有病变。</p><ol><li id="s1"><a href="https://www.nice.org.uk/guidance/ng145/chapter/Recommendations" target="_blank" rel="noopener noreferrer">NICE NG145：甲状腺疾病评估与治疗</a>，特别是 1.5 节。TSH、FT4、抗体与症状共同决定是否治疗。</li><li id="s2"><a href="https://www.jacc.org/doi/10.1016/j.jacc.2024.02.013" target="_blank" rel="noopener noreferrer">2024 ACC/AHA 下肢外周动脉疾病指南</a>：ABI≤0.90 为异常范围，应结合规范检查与临床表现。</li><li id="s3"><a href="https://www.niddk.nih.gov/health-information/liver-disease/nafld-nash/treatment" target="_blank" rel="noopener noreferrer">NIDDK：脂肪肝的治疗与逐步减重</a>。本页的 2–3 kg 为温和起步目标，不代表个人最终减重处方。</li><li id="s4"><a href="https://www.nhs.uk/medicines/antidepressants/" target="_blank" rel="noopener noreferrer">NHS：抗抑郁药用药及停药注意事项</a>。不可突然自行停用；需要调整时联系原开药医生。</li><li id="s5"><a href="https://www.niddk.nih.gov/health-information/kidney-disease/simple-kidney-cysts" target="_blank" rel="noopener noreferrer">NIDDK：单纯性肾囊肿</a>。</li><li id="s6"><a href="https://www.acog.org/news/news-releases/2026/04/acog-publishes-updated-guidance-evaluation-postmenopausal-bleeding" target="_blank" rel="noopener noreferrer">ACOG 2026：绝经后出血的评估更新</a>。出血需及时评估，不能仅依据内膜厚度排除病变。</li></ol><p>资料核对日期：2026-11-10。本页用于解释和准备就诊，不作确诊或处方；时间表是结合报告整理的建议，症状和新结果可改变安排。正文、样式和功能均在此文件内，阅读不需要联网；参考链接联网后可打开。</p></div></details>
     <p>本页包含个人健康信息，建议仅供本人、家属与接诊医生使用。</p>
-    <a class="back" href="#top">返回顶部 ↑</a>
+    <a class="back" href="#top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg>返回顶部</a>
   </footer>
+  </div>
   <script>
     const fontButton=document.getElementById('font');
-    fontButton.addEventListener('click',()=>{const large=document.documentElement.classList.toggle('large');fontButton.textContent=large?'恢复字号':'放大字号';fontButton.setAttribute('aria-pressed',String(large));});
+    const fontLabel=fontButton.querySelector('.font-label');
+    const setFont=large=>{
+      document.documentElement.classList.toggle('large',large);
+      fontLabel.textContent=large?'恢复字号':'放大字号';
+      fontButton.setAttribute('aria-pressed',String(large));
+    };
+    try{setFont(localStorage.getItem('family-health-reader-font')==='large');}catch{}
+    fontButton.addEventListener('click',()=>{
+      const large=!document.documentElement.classList.contains('large');
+      setFont(large);
+      try{localStorage.setItem('family-health-reader-font',large?'large':'standard');}catch{}
+    });
     document.getElementById('print').addEventListener('click',()=>window.print());
     const storageKey='family-health-mother-20261110';
     const boxes=[...document.querySelectorAll('input[type="checkbox"]')];
     try{const saved=JSON.parse(localStorage.getItem(storageKey)||'{}');boxes.forEach(box=>{box.checked=saved[box.id]===true;});}catch{}
     boxes.forEach(box=>box.addEventListener('change',()=>{try{localStorage.setItem(storageKey,JSON.stringify(Object.fromEntries(boxes.map(item=>[item.id,item.checked]))));}catch{}}));
+    const topicDetails=[...document.querySelectorAll('.topics details')];
+    const toggleAll=document.getElementById('toggle-all');
+    const syncToggle=()=>{toggleAll.textContent=topicDetails.every(item=>item.open)?'收起全部解释':'展开全部解释';};
+    toggleAll.addEventListener('click',()=>{const open=!topicDetails.every(item=>item.open);topicDetails.forEach(item=>item.open=open);syncToggle();});
+    topicDetails.forEach(item=>item.addEventListener('toggle',syncToggle));
+    const navLinks=[...document.querySelectorAll('.nav a')];
+    const sections=navLinks.map(link=>document.querySelector(link.getAttribute('href')));
+    let scrollQueued=false;
+    let lastActive=-1;
+    const updateNav=()=>{
+      const threshold=innerWidth<=760?150:160;
+      let active=0;
+      sections.forEach((section,index)=>{if(section.getBoundingClientRect().top<=threshold)active=index;});
+      navLinks.forEach((link,index)=>{if(index===active)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');});
+      if(active!==lastActive&&innerWidth<=760){const list=document.querySelector('.nav');const link=navLinks[active];list.scrollTo({left:Math.max(0,link.offsetLeft-list.offsetLeft-list.clientWidth/2+link.clientWidth/2),behavior:'auto'});}
+      lastActive=active;
+      scrollQueued=false;
+    };
+    window.addEventListener('scroll',()=>{if(!scrollQueued){scrollQueued=true;requestAnimationFrame(updateNav);}},{passive:true});
+    window.addEventListener('resize',updateNav);
+    updateNav();
     let openedBeforePrint=[];
     window.addEventListener('beforeprint',()=>{openedBeforePrint=[...document.querySelectorAll('details')].filter(item=>!item.open);openedBeforePrint.forEach(item=>item.open=true);});
     window.addEventListener('afterprint',()=>{openedBeforePrint.forEach(item=>item.open=false);openedBeforePrint=[];});

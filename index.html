@@ -8,32 +8,64 @@
   <meta name="description" content="个人体检结果解读与随访建议阅读入口。">
   <title>体检结果解读与随访建议</title>
   <style>
-    :root { color-scheme:light; font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; font-size:20px; color:#263c40; background:#f4f7f6; }
+    :root { color-scheme:light; --ink:#24393e; --muted:#53676b; --line:#dce5e4; --accent:#17665e; font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; font-size:20px; color:var(--ink); background:#f1f5f5; font-synthesis:none; }
     * { box-sizing:border-box; }
-    body { margin:0; line-height:1.85; }
-    main { max-width:780px; padding:64px 28px; margin:auto; }
-    h1 { margin:0 0 22px; font-size:clamp(1.65rem,5vw,2.25rem); line-height:1.5; letter-spacing:-.02em; }
-    p { margin:0 0 30px; color:#50676a; }
-    nav { border-top:1px solid #cbd9d6; }
-    a { display:block; padding:25px 4px; color:#16645b; text-decoration:none; border-bottom:1px solid #cbd9d6; text-underline-offset:.2em; }
-    a:hover strong { text-decoration:underline; }
-    a:focus-visible { outline:3px solid #16645b; outline-offset:4px; }
-    a strong { display:block; font-size:1.15rem; }
-    a span { display:block; font-size:.9rem; color:#50676a; margin-top:5px; }
-    footer { margin-top:36px; font-size:.8rem; color:#50676a; }
-    ::selection { background:#c3e0d3; }
-    @media(max-width:480px) { main { padding:38px 23px; } }
+    body { margin:0; line-height:1.8; -webkit-text-size-adjust:100%; }
+    main { max-width:880px; padding:76px 36px 42px; margin:auto; }
+    h1 { margin:0 0 20px; font-size:clamp(1.8rem,4.5vw,2.6rem); line-height:1.4; letter-spacing:-.025em; font-weight:700; text-wrap:balance; }
+    .intro { max-width:32rem; margin:0 0 40px; font-size:.95rem; color:var(--muted); }
+    nav { background:#fff; border-radius:16px; overflow:hidden; }
+    .report-link { display:grid; grid-template-columns:56px minmax(0,1fr) 28px; align-items:center; gap:24px; padding:30px; text-decoration:none; color:var(--ink); }
+    .report-link+.report-link { border-top:1px solid var(--line); }
+    .report-link:hover { background:#f8faf9; }
+    .report-link:focus-visible { outline:3px solid var(--accent); outline-offset:-4px; }
+    .report-link h2 { margin:0 0 7px; font-size:1.2rem; line-height:1.6; }
+    .report-link p { margin:0; color:var(--muted); font-size:.8rem; line-height:1.8; }
+    .report-link small { display:block; margin-bottom:7px; color:var(--muted); font-size:.75rem; font-variant-numeric:tabular-nums; }
+    .document { display:flex; align-items:center; justify-content:center; width:56px; height:66px; border-radius:12px; color:var(--accent); background:#e7f1ee; }
+    .mother .document { color:#73517d; background:#f0eaf3; }
+    svg { display:block; width:25px; height:25px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+    .document svg { width:30px; height:34px; }
+    .next { color:var(--muted); }
+    footer { padding:28px 2px 0; font-size:.78rem; color:var(--muted); line-height:1.85; }
+    footer p { margin:0; }
+    ::selection { background:#c3e0d3; color:#123e36; }
+    @media(max-width:600px) {
+      main { padding:38px 22px 30px; }
+      h1 { font-size:1.8rem; }
+      .intro { font-size:.9rem; margin-bottom:28px; }
+      .report-link { grid-template-columns:42px minmax(0,1fr) 18px; padding:24px 20px; gap:15px; }
+      .report-link h2 { font-size:1.05rem; }
+      .report-link p { font-size:.75rem; }
+      .document { width:42px; height:54px; border-radius:9px; }
+      .document svg { width:25px; height:29px; }
+      .next { width:18px; height:18px; }
+      footer { padding-top:22px; }
+    }
+    @media(max-width:359px) {
+      main { padding-left:18px; padding-right:18px; }
+      .report-link { grid-template-columns:minmax(0,1fr) 18px; padding:22px 20px; }
+      .document { display:none; }
+    }
   </style>
 </head>
 <body>
   <main>
     <h1>体检结果解读<br>与随访建议</h1>
-    <p>请选择相应页面，查看检查结果说明、就诊优先级、日常管理与复查安排。</p>
+    <p class="intro">请选择相应页面，查看检查结果说明、就诊优先级、日常管理与复查安排。</p>
     <nav aria-label="资料选择">
-      <a href="father.html"><strong>父亲体检报告解读</strong><span>查看结果分析与后续就诊建议 →</span></a>
-      <a href="mother.html"><strong>母亲体检报告解读</strong><span>查看结果分析与后续就诊建议 →</span></a>
+      <a class="report-link father" href="father.html">
+        <span class="document"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M7 2h11l6 6v26H3V2zm11 0v7h6M8 16h11M8 22h11M8 28h7"/></svg></span>
+        <div><h2>父亲体检报告解读</h2><small>62 岁 · 2026-10-29 体检</small><p>查看结果分析与后续就诊建议</p></div>
+        <svg class="next" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+      </a>
+      <a class="report-link mother" href="mother.html">
+        <span class="document"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M7 2h11l6 6v26H3V2zm11 0v7h6M8 16h11M8 22h11M8 28h7"/></svg></span>
+        <div><h2>母亲体检报告解读</h2><small>59 岁 · 2026-10-30 体检</small><p>查看结果分析与后续就诊建议</p></div>
+        <svg class="next" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
+      </a>
     </nav>
-    <footer>本网站用于整理与阅读个人健康资料。具体诊疗方案以接诊医生意见为准。</footer>
+    <footer><p>本网站用于整理与阅读个人健康资料。具体诊疗方案以接诊医生意见为准。</p></footer>
   </main>
 </body>
 </html>

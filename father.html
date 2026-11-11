@@ -10,92 +10,202 @@
   <meta name="description" content="父亲体检结果分析、就诊优先级与随访建议。">
   <title>父亲体检结果分析与随访建议</title>
   <style>
-    :root { --ink:var(--pp-fg,#1e3539); --muted:var(--pp-muted,#4c6468); --paper:var(--pp-page-bg,#f4f7f6); --surface:var(--pp-surface,#fff); --line:var(--pp-border,#cbd9d6); --accent:var(--pp-accent,#16645b); --soft:var(--pp-surface-alt,#e8f1ed); --danger:#8d3430; --danger-bg:#fff0ed; font-size:20px; color-scheme:light; }
+    :root {
+      --ink:var(--pp-fg,#24393e); --muted:var(--pp-muted,#53676b);
+      --paper:var(--pp-page-bg,#f1f5f5); --surface:var(--pp-surface,#fff);
+      --line:var(--pp-border,#dce5e4); --accent:var(--pp-accent,#17665e);
+      --soft:var(--pp-surface-alt,#e7f1ee); --danger:#873f35; --danger-bg:#fff3ef;
+      font-size:20px; color-scheme:light; font-synthesis:none;
+    }
     * { box-sizing:border-box; }
-    html { scroll-behavior:smooth; scroll-padding-top:5rem; }
-    body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.85; -webkit-text-size-adjust:100%; }
-    ::selection { background:#c3e0d3; color:#123e36; }
-    a { color:var(--accent); text-underline-offset:.2em; overflow-wrap:anywhere; }
+    html { scroll-behavior:smooth; scroll-padding-top:5rem; scrollbar-color:var(--line) var(--paper); }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; line-height:1.8; -webkit-text-size-adjust:100%; }
+    ::selection { background:var(--soft); color:var(--accent); }
+    a { color:var(--accent); text-underline-offset:.22em; overflow-wrap:anywhere; }
     button,summary,a,input { -webkit-tap-highlight-color:transparent; }
-    :focus-visible { outline:3px solid var(--accent); outline-offset:5px; }
-    button { min-height:48px; padding:.35rem .7rem; border:1px solid var(--line); border-radius:8px; font:inherit; font-size:.85rem; color:var(--ink); background:var(--surface); cursor:pointer; }
-    button:hover { background:var(--soft); }
-    .wrap { max-width:1000px; margin:auto; padding:0 36px; }
-    .top { display:flex; align-items:center; justify-content:space-between; gap:20px; padding-top:22px; padding-bottom:22px; font-size:.85rem; }
-    .top p { margin:0; color:var(--muted); }
-    .tools { display:flex; gap:8px; flex-shrink:0; }
-    .hero { padding:36px 0 40px; border-top:1px solid var(--line); }
-    h1 { margin:0 0 22px; font-size:clamp(1.9rem,4.7vw,2.8rem); line-height:1.4; letter-spacing:-.025em; font-weight:700; text-wrap:balance; }
-    h1 span { color:var(--accent); }
-    .intro { max-width:42rem; margin:0; font-size:1.05rem; }
-    .lead { background:var(--soft); padding:22px 26px; margin-top:28px; border-radius:12px; }
-    .lead p { margin:0; }
-    .lead p+p { margin-top:8px; }
-    .meta,.fine { color:var(--muted); font-size:.8rem; }
-    nav { position:sticky; top:0; z-index:3; background:var(--surface); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
-    .nav { display:flex; gap:28px; overflow-x:auto; padding-top:10px; padding-bottom:10px; }
-    .nav a { white-space:nowrap; font-size:.85rem; text-decoration:none; min-height:36px; display:flex; align-items:center; }
-    main { padding-bottom:48px; }
-    section { padding-top:46px; scroll-margin-top:1rem; }
-    h2 { margin:0 0 16px; font-size:1.45rem; line-height:1.5; letter-spacing:-.02em; }
-    h3 { margin:0 0 9px; font-size:1.08rem; }
-    p { margin:0 0 14px; }
-    .actions { border-top:1px solid var(--line); }
-    .action { display:grid; grid-template-columns:28px 1fr; gap:16px; padding:23px 0; border-bottom:1px solid var(--line); }
+    :focus-visible { outline:3px solid var(--accent); outline-offset:4px; }
+    button { min-height:46px; padding:10px 14px; border:1px solid var(--line); border-radius:10px; font:inherit; font-size:.8rem; line-height:1.4; color:var(--ink); background:var(--surface); cursor:pointer; }
+    button:hover { border-color:var(--accent); background:var(--soft); }
+    button:active { transform:translateY(1px); }
+    svg { display:block; width:22px; height:22px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; flex-shrink:0; }
+    .wrap { width:100%; max-width:1180px; margin:auto; padding:0 40px; }
+    .top { display:flex; align-items:center; justify-content:space-between; gap:22px; padding-top:24px; padding-bottom:24px; }
+    .top p { margin:0; color:var(--muted); font-size:.75rem; line-height:1.7; }
+    .top p strong { color:var(--ink); font-size:.9rem; font-weight:650; }
+    .tools { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+    .tools button { display:flex; align-items:center; justify-content:center; gap:8px; }
+    .hero { display:grid; grid-template-columns:1.04fr 1fr; column-gap:52px; align-items:start; padding:24px 0 42px; }
+    h1 { grid-column:1; margin:0 0 16px; font-size:clamp(1.65rem,3vw,2.15rem); line-height:1.4; letter-spacing:-.025em; font-weight:700; text-wrap:balance; }
+    h1 span { color:inherit; }
+    .intro { grid-column:1; max-width:32rem; margin:0; color:var(--muted); font-size:.95rem; line-height:1.8; }
+    .lead { grid-column:2; grid-row:1 / 4; background:var(--soft); padding:24px 28px; border-radius:16px; }
+    .lead p { margin:0; font-size:.9rem; line-height:1.85; }
+    .lead p+p { margin-top:12px; }
+    .lead p:first-child strong { display:flex; align-items:center; gap:10px; font-size:.95rem; color:var(--accent); }
+    .lead p:first-child strong::before { content:""; width:7px; height:7px; border-radius:50%; background:currentColor; }
+    .lead p:last-child:not(:nth-child(2)) { padding-top:12px; border-top:1px solid var(--line); }
+    .overview { grid-column:1; border:0; margin:0; }
+    .overview>summary { width:fit-content; min-height:44px; padding:8px 28px 8px 0; color:var(--accent); font-size:.8rem; font-weight:600; }
+    .overview>summary .chevron { top:13px; width:17px; height:17px; }
+    .overview .intro { margin-top:8px; font-size:.85rem; }
+    .overview .meta { font-size:.73rem; }
+    .meta,.fine { color:var(--muted); font-size:.78rem; line-height:1.8; }
+    .meta { grid-column:1; }
+    .report-layout { display:grid; grid-template-columns:185px minmax(0,1fr); column-gap:36px; max-width:1180px; margin:auto; padding:0 40px 44px; align-items:start; }
+    nav { grid-column:1; grid-row:1; position:sticky; top:28px; padding-top:14px; }
+    .nav { display:flex; flex-direction:column; gap:7px; margin:0; padding:0; }
+    .nav a { display:flex; align-items:center; gap:10px; min-height:48px; padding:10px 14px; border-radius:10px; color:var(--muted); font-size:.85rem; line-height:1.5; text-decoration:none; white-space:nowrap; }
+    .nav a:hover { color:var(--accent); background:var(--soft); }
+    .nav a[aria-current=location] { background:var(--soft); color:var(--accent); font-weight:650; }
+    .nav a::before { content:""; width:5px; height:5px; border-radius:50%; background:currentColor; opacity:.4; flex-shrink:0; }
+    .nav a[aria-current=location]::before { opacity:1; }
+    main.wrap { grid-column:2; grid-row:1; max-width:none; min-width:0; padding:0 36px 36px; border-radius:16px; background:var(--surface); }
+    section { padding-top:34px; scroll-margin-top:1rem; }
+    section+section { margin-top:8px; }
+    h2 { margin:0 0 14px; font-size:1.3rem; line-height:1.5; letter-spacing:-.02em; }
+    h3 { margin:0 0 10px; font-size:1.02rem; line-height:1.6; }
+    p { margin:0 0 16px; }
+    strong { font-weight:650; }
+    .actions { margin-top:20px; }
+    .action { display:grid; grid-template-columns:28px minmax(0,1fr); gap:14px; padding:26px 0; border-top:1px solid var(--line); }
+    .action:last-child { border-bottom:1px solid var(--line); }
     input[type=checkbox] { width:25px; height:25px; margin:7px 0 0; accent-color:var(--accent); cursor:pointer; }
     .action label { cursor:pointer; display:block; }
-    .action label strong { display:block; font-size:1.08rem; }
-    .action p { margin:8px 0 0; }
-    .when { display:inline-block; color:var(--accent); font-size:.85rem; font-weight:600; margin-bottom:4px; }
-    .urgent { border:1px solid #d5aca4; background:var(--danger-bg); color:#642522; border-radius:12px; padding:23px 26px; margin-top:26px; }
+    .action label strong { display:block; margin-top:9px; font-size:1.05rem; line-height:1.65; }
+    .action p { margin:12px 0 0; }
+    .when { display:inline-block; padding:3px 9px; border-radius:6px; color:var(--accent); background:var(--soft); font-size:.75rem; font-weight:600; line-height:1.8; }
+    .action:has(input:checked) label strong { color:var(--muted); }
+    .urgent { border:1px solid #e7c9bf; background:var(--danger-bg); color:#67382f; border-radius:12px; padding:22px 24px; margin-top:24px; }
     .urgent h3 { color:var(--danger); }
+    .urgent p { font-size:.9rem; }
     .urgent p:last-child { margin-bottom:0; }
-    .topics { border-top:1px solid var(--line); }
+    .section-heading { display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:8px 20px; margin-bottom:10px; }
+    .section-heading h2 { margin:0; }
+    .toggle-all { border:0; border-radius:6px; color:var(--accent); font-size:.75rem; padding:10px 0; background:transparent; min-height:44px; }
+    .toggle-all:hover { background:transparent; text-decoration:underline; text-underline-offset:.25em; }
+    .topics { padding-top:8px; }
     details { border-bottom:1px solid var(--line); }
-    summary { padding:21px 30px 21px 0; cursor:pointer; position:relative; list-style:none; }
+    summary { display:block; padding:22px 36px 22px 0; cursor:pointer; position:relative; list-style:none; }
     summary::-webkit-details-marker { display:none; }
-    summary::after { content:"+"; position:absolute; right:4px; top:22px; color:var(--accent); font-size:1.25rem; line-height:1.2; }
-    details[open]>summary::after { content:"−"; }
-    summary strong { display:block; font-size:1.08rem; }
-    summary small { display:block; font-size:.85rem; font-weight:400; color:var(--muted); line-height:1.7; margin-top:5px; }
-    .detail { padding:0 0 20px; max-width:45rem; }
+    .chevron { position:absolute; right:0; top:27px; width:20px; height:20px; color:var(--muted); transition:transform .18s ease; }
+    details[open]>summary .chevron { transform:rotate(180deg); color:var(--accent); }
+    summary:hover strong { color:var(--accent); }
+    summary strong { display:block; font-size:1.02rem; line-height:1.7; }
+    summary small { display:block; font-size:.8rem; font-weight:400; color:var(--muted); line-height:1.8; margin-top:7px; font-variant-numeric:tabular-nums; }
+    .detail { padding:0 0 23px; }
     .detail p:last-child { margin-bottom:0; }
-    .source { color:var(--muted); font-size:.78rem; }
-    .habit { display:grid; grid-template-columns:100px 1fr; gap:16px; padding:17px 0; border-bottom:1px solid var(--line); }
+    .source { color:var(--muted); font-size:.75rem; line-height:1.85; padding-top:5px; }
+    .habit { display:grid; grid-template-columns:90px minmax(0,1fr); gap:20px; padding:22px 0; border-bottom:1px solid var(--line); }
     .habit p { margin:0; }
-    .habit strong { color:var(--accent); }
-    ol,ul { padding-left:1.3rem; margin:12px 0; }
+    .habit strong { color:var(--accent); font-size:.9rem; }
+    ol,ul { padding-left:1.25rem; margin:18px 0; }
     li+li { margin-top:10px; }
-    .schedule { margin:0; }
-    .schedule>div { padding:18px 0; border-bottom:1px solid var(--line); display:grid; grid-template-columns:165px 1fr; gap:20px; }
-    dt { font-weight:600; color:var(--accent); }
+    .schedule { margin:22px 0 0 5px; padding-left:25px; border-left:1px solid var(--line); }
+    .schedule>div { position:relative; padding:0 0 25px; }
+    .schedule>div:last-child { padding-bottom:0; }
+    .schedule>div::before { content:""; position:absolute; left:-31px; top:8px; width:11px; height:11px; background:var(--accent); border:3px solid var(--surface); border-radius:50%; box-shadow:0 0 0 1px var(--accent); }
+    dt { margin-bottom:8px; font-weight:650; color:var(--accent); font-size:.9rem; }
     dd { margin:0; }
-    .doctor { background:var(--soft); padding:26px; border-radius:12px; }
+    .doctor { background:var(--soft); padding:25px; border-radius:12px; }
+    .doctor p { font-variant-numeric:tabular-nums; }
     .doctor p:last-child { margin-bottom:0; }
-    footer { border-top:1px solid var(--line); padding:26px 0 40px; color:var(--muted); font-size:.8rem; }
-    footer summary strong { font-size:.9rem; }
+    footer.wrap { grid-column:2; max-width:none; min-width:0; margin-top:20px; padding:0 10px; color:var(--muted); font-size:.78rem; }
+    footer summary strong { font-size:.85rem; }
     footer li { overflow-wrap:anywhere; }
-    footer details { margin-bottom:22px; }
-    .back { display:inline-block; padding:10px 0; }
+    footer details { margin-bottom:20px; }
+    .back { display:inline-flex; align-items:center; gap:7px; padding:8px 0; min-height:44px; text-decoration:none; font-size:.8rem; }
+    .back svg { width:17px; height:17px; }
     .large { font-size:24px; }
-    @media(max-width:620px) { .wrap { padding-left:22px; padding-right:22px; } .top { align-items:flex-start; gap:12px; } .top p { max-width:10em; } .tools { flex-direction:column; gap:5px; } .hero { padding-top:24px; } .lead,.urgent,.doctor { padding:20px; } .nav { gap:24px; } .habit { grid-template-columns:1fr; gap:4px; } .schedule>div { grid-template-columns:1fr; gap:5px; } section { padding-top:36px; } }
-    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
-    @media print { :root,.large { font-size:12pt; } body { background:white; color:#111; } .wrap { max-width:none; padding:0; } .tools,nav,.back { display:none; } .hero { padding:10px 0 20px; } h1 { font-size:26pt; } section { padding-top:20px; } details,.action,.habit,.schedule>div,.urgent { break-inside:avoid; } summary { padding:12px 0; } summary::after { display:none; } .urgent { background:white; } a { color:inherit; } }
+    @media(max-width:1000px) {
+      .wrap { padding:0 28px; }
+      .top { padding-top:22px; padding-bottom:22px; }
+      .hero { column-gap:30px; }
+      .report-layout { grid-template-columns:155px minmax(0,1fr); gap:24px; padding:0 28px 36px; }
+      main.wrap { padding:0 28px 30px; }
+      .nav a { padding-left:10px; padding-right:10px; font-size:.8rem; }
+    }
+    @media(max-width:760px) {
+      html { scroll-padding-top:4.5rem; }
+      .wrap { padding-left:22px; padding-right:22px; }
+      .top { gap:14px; padding-top:19px; padding-bottom:19px; }
+      .top p { font-size:.75rem; }
+      .top p strong { font-size:.8rem; }
+      .tools { gap:6px; }
+      .tools button { min-height:44px; padding:10px; gap:6px; font-size:.75rem; }
+      .tools svg { width:20px; height:20px; }
+      .print-label { display:none; }
+      .hero { display:block; padding:12px 0 26px; }
+      h1 { margin-bottom:12px; font-size:1.65rem; line-height:1.4; }
+      .intro { font-size:.9rem; line-height:1.8; }
+      .lead { padding:18px 20px; margin-top:20px; }
+      .lead p { font-size:.85rem; line-height:1.8; }
+      .lead p+p { margin-top:10px; }
+      .lead p:first-child strong { font-size:.85rem; }
+      .meta { font-size:.7rem; }
+      .report-layout { display:block; padding:0 0 32px; }
+      nav { top:0; padding:7px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--surface); z-index:5; }
+      .nav { flex-direction:row; gap:4px; overflow-x:auto; padding:0 16px; scrollbar-width:thin; scroll-padding-inline:16px; }
+      .nav a { flex-shrink:0; min-height:43px; padding:10px 12px; font-size:.75rem; border-radius:8px; }
+      .nav a::before { display:none; }
+      main.wrap { margin-top:16px; padding:0 22px 28px; border-radius:0; }
+      section { padding-top:28px; }
+      h2 { font-size:1.2rem; }
+      .action { padding:23px 0; gap:12px; }
+      .action label strong { font-size:1rem; }
+      .when { font-size:.7rem; }
+      .action p { font-size:.95rem; line-height:1.85; }
+      .urgent { padding:18px; }
+      .urgent p { font-size:.85rem; }
+      .habit { grid-template-columns:1fr; gap:7px; }
+      .habit strong { font-size:.85rem; }
+      .doctor { padding:20px; }
+      footer.wrap { margin-top:12px; padding:0 22px; }
+    }
+    @media(max-width:359px) {
+      .wrap { padding-left:18px; padding-right:18px; }
+      .top { gap:9px; }
+      .tools button { padding:9px; }
+      .tools #font svg { display:none; }
+      .top p strong { font-size:.76rem; }
+      main.wrap,footer.wrap { padding-left:18px; padding-right:18px; }
+    }
+    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { transition:none!important; } }
+    @media print {
+      :root,.large { font-size:12pt; }
+      body { background:white; color:#111; }
+      .wrap,.report-layout { max-width:none; padding:0; }
+      .tools,nav,.back,.toggle-all { display:none; }
+      .top { padding:0 0 12px; }
+      .hero,.report-layout { display:block; }
+      .hero { padding:0 0 20px; }
+      h1 { font-size:24pt; }
+      .lead { margin-top:15px; padding:15px; }
+      main.wrap,footer.wrap { padding:0; background:white; margin:0; }
+      section { padding-top:20px; }
+      details,.action,.habit,.schedule>div,.urgent { break-inside:avoid; }
+      summary { padding:12px 0; }
+      .chevron { display:none; }
+      .urgent { background:white; }
+      a { color:inherit; }
+    }
   </style>
 </head>
 <body>
   <header class="wrap top" id="top">
-    <p>父亲体检报告解读<br>62 岁 · 2026 年 10 月 29 日体检</p>
-    <div class="tools"><button id="font" type="button" aria-pressed="false">放大字号</button><button id="print" type="button">打印 / 存为 PDF</button></div>
+    <p><strong>父亲体检报告解读</strong><br>62 岁 · 2026-10-29 体检</p>
+    <div class="tools"><button id="font" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 18 5-12 5 12M5 14h6m4 4 3-8 3 8m-5-3h4"/></svg><span class="font-label">放大字号</span></button><button id="print" type="button" aria-label="打印或存为 PDF" title="打印或存为 PDF"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8V3h10v5M7 16H4V9h16v7h-3M7 13h10v8H7zM17 11h.01"/></svg><span class="print-label">打印 / 存为 PDF</span></button></div>
   </header>
   <div class="wrap">
     <div class="hero">
       <h1>体检结果分析<br><span>与后续就诊建议</span></h1>
+      <details class="overview"><summary>报告概述与整理说明<svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
       <p class="intro">本次体检需优先关注血压显著升高及尿检异常，并评估相关心血管和肾脏风险。甲状腺旁结节需进一步检查，其余项目按优先级安排随访。</p>
-      <div class="lead"><p><strong>优先处理事项</strong></p><p>今日复测血压并联系心血管内科；本周复核尿蛋白与尿潜血；近期至内分泌科检查血钙和甲状旁腺激素。</p><p><strong>如出现胸痛、明显气短或突发一侧肢体无力，应立即拨打 120。</strong></p></div>
       <p class="meta" style="margin:16px 0 0">整理于 2026-11-10。以下安排以“尚未复查”为前提；已经完成的项目，按新结果和医生意见更新。</p>
+      </details>
+      <div class="lead"><p><strong>优先处理事项</strong></p><p>今日复测血压并联系心血管内科；本周复核尿蛋白与尿潜血；近期至内分泌科检查血钙和甲状旁腺激素。</p><p><strong>如出现胸痛、明显气短或突发一侧肢体无力，应立即拨打 120。</strong></p></div>
     </div>
   </div>
+  <div class="report-layout">
   <nav aria-label="页面目录"><div class="wrap nav"><a href="#todo">就诊优先级</a><a href="#explain">结果解读</a><a href="#daily">日常管理</a><a href="#followup">复查安排</a><a href="#doctor">就诊摘要</a></div></nav>
   <main class="wrap">
     <section id="todo">
@@ -113,15 +223,15 @@
       </aside>
     </section>
     <section id="explain">
-      <h2>异常结果与临床意义</h2>
+      <div class="section-heading"><h2>异常结果与临床意义</h2><button class="toggle-all" id="toggle-all" type="button">展开全部解释</button></div>
       <p class="fine">展开各项可查看原始结果、临床意义与后续建议。</p>
       <div class="topics">
-        <details open><summary><strong>血压显著升高：有无症状均需及时评估</strong><small>175/109 mmHg · 单次读数达到我国 2 级高血压范围</small></summary><div class="detail"><p>单次测量需要规范复核，但该水平的血压不宜仅依靠生活方式调整后长期观察。合并尿检异常时，需进一步评估心、脑、肾相关风险。</p><p>目前降压药使用情况不详。已用药者应携带药物信息，由医生评估剂量及疗效；尚未用药者应由医生确定治疗方案。<strong>避免使用他人处方药，也不应因单次血压正常而自行停药。</strong></p><p class="source">原报告：PDF 第 5、9 页；对话约 00:00–02:00、06:00–08:30。</p></div></details>
-        <details open><summary><strong>蛋白尿合并血尿：需明确异常来源</strong><small>尿蛋白 2+ · 潜血 1+ · 红细胞 3–5 个/HP</small></summary><div class="detail"><p>上述异常可能与运动、感染或取样因素有关，也可能提示肾脏或尿路病变。单次结果不足以诊断慢性肾病，也不足以确认其为一过性变化。</p><p>肌酐 <strong>80 μmol/L</strong>、双肾超声未见明显异常，在本次检查中未提示明显异常；但上述结果<strong>不能排除早期肾脏问题</strong>，还需要尿蛋白定量和复查。肾内科与泌尿外科的评估可以同时进行。<a href="#s3">[3]</a></p><p>留尿前避免剧烈运动，正常饮水，避免为取样而过量饮水；按医院要求留清洁中段尿。如出现肉眼血尿、尿量明显减少、水肿或发热伴腰痛，应提前就医。</p><p class="source">原报告：PDF 第 6、16–18 页。尿白细胞未见、亚硝酸盐阴性，不能据此直接按感染用药。</p></div></details>
-        <details><summary><strong>心血管异常：需结合临床评估，尚不能确诊冠心病</strong><small>ST 段轻度改变 · 舒张功能减低 · 颈动脉内膜约 1.0 mm</small></summary><div class="detail"><p>ST 段改变有多种原因，需要结合症状、既往心电图和复查，由心血管内科判断是否需进一步评估心肌缺血；<strong>该项结果本身不足以诊断心肌梗死或冠心病。</strong></p><p>心脏射血分数 <strong>66%</strong>，收缩功能保留；“舒张功能减低”提示心脏舒张与充盈相关指标发生变化，不能仅凭该项诊断心力衰竭，也不宜简单归因于活动不足。</p><p>颈动脉报告明确写了<strong>未见明显斑块、未见狭窄</strong>。总胆固醇 <strong>5.63</strong>、低密度脂蛋白（LDL-C）<strong>3.21 mmol/L</strong>，需结合年龄、血压、吸烟史及肾脏情况综合评估，确定降脂目标及他汀类药物的适用性。不宜自行加用阿司匹林。</p><p class="source">原报告：PDF 第 5、13、15、17–18 页；对话约 00:45–02:00、07:30–09:00。</p></div></details>
-        <details><summary><strong>甲状腺结节与甲状腺旁结节：应分别评估</strong><small>甲状腺 2×1 mm、TI-RADS 2 类；甲状腺旁 13×7 mm</small></summary><div class="detail"><p><strong>甲状腺内结节：</strong>影像倾向良性，报告建议 6–12 个月复查，通常无需仅因该结节立即进行穿刺或手术。</p><p><strong>甲状腺旁结节：</strong>应先明确来源及是否存在激素分泌异常，不能仅依据大小判断。甲状旁腺分泌的是 <strong>PTH</strong>，与钙代谢有关；录音中将其表述为“降钙素”不准确。<a href="#s4">[4]</a></p><p>甲状腺功能五项在本次实验室范围内，但<strong>甲状腺功能正常不代表甲状旁腺功能正常</strong>。本次报告同时提示骨量减少，建议结合评估钙代谢及骨骼健康。</p><p class="source">原报告：PDF 第 5、14、18–19、23、26 页；对话约 02:15–04:15。</p></div></details>
-        <details><summary><strong>前列腺增生：根据排尿症状安排评估</strong><small>约 45×34×32 mm，伴钙化灶</small></summary><div class="detail"><p>增生和钙化灶较常见，该结果本身不等于肿瘤。如存在尿频、夜尿增多、尿线变细、排尿不尽或排尿费力，应至泌尿外科就诊。<strong>如完全无法排尿并伴下腹胀痛，应立即急诊处理。</strong></p><p>报告未见 PSA 检测结果。可与泌尿外科讨论是否查总 PSA、游离 PSA；PSA 是辅助评估，不能仅凭单项结果排除或确诊肿瘤。持续血尿仍要独立查原因。</p><p class="source">原报告：PDF 第 5、14 页；对话约 04:10–05:20。</p></div></details>
-        <details><summary><strong>其他随访项目：骨量、视力、口腔及血常规</strong><small>可在优先问题评估后，按需安排检查</small></summary><div class="detail"><p><strong>骨量：</strong>本次为超声骨密度筛查，不能直接据此诊断骨质疏松。内分泌科可结合骨折史决定是否做腰椎、髋部 DXA；先明确血钙、PTH 情况，再决定是否使用补充剂。</p><p><strong>血常规：</strong>平均血红蛋白浓度（MCHC）<strong>385 g/L</strong> 偏高，血红蛋白 <strong>170 g/L</strong> 在报告范围内。复诊时可同时复查血常规，不能仅凭这一项认定是缺水；若持续异常，由医生进一步判断。</p><p><strong>眼睛和牙齿：</strong>双眼裸眼视力 4.8，可以验光和眼科检查；缺牙、活动义齿由口腔科评估。视力下降不应仅归因于年龄增长，需评估可干预的原因。</p><p><strong>血糖：</strong>空腹血糖 5.82 mmol/L、糖化血红蛋白 5.8%，本次结果不足以诊断糖尿病；保持饮食和运动管理，随诊复查。</p><p class="source">原报告：PDF 第 5–6、11–13、16、18–19、26 页。</p></div></details>
+        <details open><summary><strong>血压显著升高：有无症状均需及时评估</strong><small>175/109 mmHg · 单次读数达到我国 2 级高血压范围</small><svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="detail"><p>单次测量需要规范复核，但该水平的血压不宜仅依靠生活方式调整后长期观察。合并尿检异常时，需进一步评估心、脑、肾相关风险。</p><p>目前降压药使用情况不详。已用药者应携带药物信息，由医生评估剂量及疗效；尚未用药者应由医生确定治疗方案。<strong>避免使用他人处方药，也不应因单次血压正常而自行停药。</strong></p><p class="source">原报告：PDF 第 5、9 页；对话约 00:00–02:00、06:00–08:30。</p></div></details>
+        <details open><summary><strong>蛋白尿合并血尿：需明确异常来源</strong><small>尿蛋白 2+ · 潜血 1+ · 红细胞 3–5 个/HP</small><svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="detail"><p>上述异常可能与运动、感染或取样因素有关，也可能提示肾脏或尿路病变。单次结果不足以诊断慢性肾病，也不足以确认其为一过性变化。</p><p>肌酐 <strong>80 μmol/L</strong>、双肾超声未见明显异常，在本次检查中未提示明显异常；但上述结果<strong>不能排除早期肾脏问题</strong>，还需要尿蛋白定量和复查。肾内科与泌尿外科的评估可以同时进行。<a href="#s3">[3]</a></p><p>留尿前避免剧烈运动，正常饮水，避免为取样而过量饮水；按医院要求留清洁中段尿。如出现肉眼血尿、尿量明显减少、水肿或发热伴腰痛，应提前就医。</p><p class="source">原报告：PDF 第 6、16–18 页。尿白细胞未见、亚硝酸盐阴性，不能据此直接按感染用药。</p></div></details>
+        <details><summary><strong>心血管异常：需结合临床评估，尚不能确诊冠心病</strong><small>ST 段轻度改变 · 舒张功能减低 · 颈动脉内膜约 1.0 mm</small><svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="detail"><p>ST 段改变有多种原因，需要结合症状、既往心电图和复查，由心血管内科判断是否需进一步评估心肌缺血；<strong>该项结果本身不足以诊断心肌梗死或冠心病。</strong></p><p>心脏射血分数 <strong>66%</strong>，收缩功能保留；“舒张功能减低”提示心脏舒张与充盈相关指标发生变化，不能仅凭该项诊断心力衰竭，也不宜简单归因于活动不足。</p><p>颈动脉报告明确写了<strong>未见明显斑块、未见狭窄</strong>。总胆固醇 <strong>5.63</strong>、低密度脂蛋白（LDL-C）<strong>3.21 mmol/L</strong>，需结合年龄、血压、吸烟史及肾脏情况综合评估，确定降脂目标及他汀类药物的适用性。不宜自行加用阿司匹林。</p><p class="source">原报告：PDF 第 5、13、15、17–18 页；对话约 00:45–02:00、07:30–09:00。</p></div></details>
+        <details><summary><strong>甲状腺结节与甲状腺旁结节：应分别评估</strong><small>甲状腺 2×1 mm、TI-RADS 2 类；甲状腺旁 13×7 mm</small><svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="detail"><p><strong>甲状腺内结节：</strong>影像倾向良性，报告建议 6–12 个月复查，通常无需仅因该结节立即进行穿刺或手术。</p><p><strong>甲状腺旁结节：</strong>应先明确来源及是否存在激素分泌异常，不能仅依据大小判断。甲状旁腺分泌的是 <strong>PTH</strong>，与钙代谢有关；录音中将其表述为“降钙素”不准确。<a href="#s4">[4]</a></p><p>甲状腺功能五项在本次实验室范围内，但<strong>甲状腺功能正常不代表甲状旁腺功能正常</strong>。本次报告同时提示骨量减少，建议结合评估钙代谢及骨骼健康。</p><p class="source">原报告：PDF 第 5、14、18–19、23、26 页；对话约 02:15–04:15。</p></div></details>
+        <details><summary><strong>前列腺增生：根据排尿症状安排评估</strong><small>约 45×34×32 mm，伴钙化灶</small><svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="detail"><p>增生和钙化灶较常见，该结果本身不等于肿瘤。如存在尿频、夜尿增多、尿线变细、排尿不尽或排尿费力，应至泌尿外科就诊。<strong>如完全无法排尿并伴下腹胀痛，应立即急诊处理。</strong></p><p>报告未见 PSA 检测结果。可与泌尿外科讨论是否查总 PSA、游离 PSA；PSA 是辅助评估，不能仅凭单项结果排除或确诊肿瘤。持续血尿仍要独立查原因。</p><p class="source">原报告：PDF 第 5、14 页；对话约 04:10–05:20。</p></div></details>
+        <details><summary><strong>其他随访项目：骨量、视力、口腔及血常规</strong><small>可在优先问题评估后，按需安排检查</small><svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="detail"><p><strong>骨量：</strong>本次为超声骨密度筛查，不能直接据此诊断骨质疏松。内分泌科可结合骨折史决定是否做腰椎、髋部 DXA；先明确血钙、PTH 情况，再决定是否使用补充剂。</p><p><strong>血常规：</strong>平均血红蛋白浓度（MCHC）<strong>385 g/L</strong> 偏高，血红蛋白 <strong>170 g/L</strong> 在报告范围内。复诊时可同时复查血常规，不能仅凭这一项认定是缺水；若持续异常，由医生进一步判断。</p><p><strong>眼睛和牙齿：</strong>双眼裸眼视力 4.8，可以验光和眼科检查；缺牙、活动义齿由口腔科评估。视力下降不应仅归因于年龄增长，需评估可干预的原因。</p><p><strong>血糖：</strong>空腹血糖 5.82 mmol/L、糖化血红蛋白 5.8%，本次结果不足以诊断糖尿病；保持饮食和运动管理，随诊复查。</p><p class="source">原报告：PDF 第 5–6、11–13、16、18–19、26 页。</p></div></details>
       </div>
     </section>
     <section id="daily">
@@ -147,18 +257,51 @@
     </section>
   </main>
   <footer class="wrap">
-    <details><summary><strong>依据、录音核对与适用范围</strong><small>供家属和接诊医生核对</small></summary><div class="detail"><p>整理依据：父亲 2026-10-29 的 30 页体检报告，以及《分析录音.txt》中约 00:00–10:00 的咨询内容。页码为 PDF 实际页序。数值以原始报告为准；录音及其 AI 总结不能代替原始结果。</p><p>本页对录音做了三处关键校正：甲状旁腺分泌 PTH；蛋白尿合并血尿应重视肾内科评估；甲状腺良性小结节和甲状腺旁结节采用不同的随访安排。ST 段改变不直接等于心肌缺血，颈动脉内膜增厚也不直接决定必须用他汀。</p><ol><li id="s1"><a href="https://cs.medjournals.cn/article/doi/full/10.3760/cma.j.cn112148-20250401-00234" target="_blank" rel="noopener noreferrer">国家基层高血压防治管理指南（2025 版）</a>：诊断复核、明显血压升高的处理。无症状但复测≥180/110 时当天评估，是本页结合报告提出的就诊建议。</li><li id="s2"><a href="https://www.heart.org/en/health-topics/high-blood-pressure/understanding-blood-pressure-readings/monitoring-your-blood-pressure-at-home" target="_blank" rel="noopener noreferrer">美国心脏协会：家庭血压测量</a>。</li><li id="s3"><a href="https://www.niddk.nih.gov/health-information/kidney-disease/chronic-kidney-disease-ckd/tests-diagnosis" target="_blank" rel="noopener noreferrer">NIDDK：肾脏病的检查</a>；<a href="https://www.niddk.nih.gov/health-information/professionals/clinical-tools-patient-management/kidney-disease/identify-manage-patients/evaluate-ckd/assess-urine-albumin" target="_blank" rel="noopener noreferrer">尿白蛋白及 UACR</a>。</li><li id="s4"><a href="https://www.niddk.nih.gov/health-information/endocrine-diseases/primary-hyperparathyroidism" target="_blank" rel="noopener noreferrer">NIDDK：甲状旁腺功能亢进与血钙、PTH 检查</a>。</li></ol><p>资料核对日期：2026-11-10。本页用于解释和准备就诊，不作确诊或处方；症状和复查结果可改变优先级。正文、样式和功能均在此文件内，阅读不需要联网；参考链接联网后可打开。</p></div></details>
+    <details><summary><strong>依据、录音核对与适用范围</strong><small>供家属和接诊医生核对</small><svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary><div class="detail"><p>整理依据：父亲 2026-10-29 的 30 页体检报告，以及《分析录音.txt》中约 00:00–10:00 的咨询内容。页码为 PDF 实际页序。数值以原始报告为准；录音及其 AI 总结不能代替原始结果。</p><p>本页对录音做了三处关键校正：甲状旁腺分泌 PTH；蛋白尿合并血尿应重视肾内科评估；甲状腺良性小结节和甲状腺旁结节采用不同的随访安排。ST 段改变不直接等于心肌缺血，颈动脉内膜增厚也不直接决定必须用他汀。</p><ol><li id="s1"><a href="https://cs.medjournals.cn/article/doi/full/10.3760/cma.j.cn112148-20250401-00234" target="_blank" rel="noopener noreferrer">国家基层高血压防治管理指南（2025 版）</a>：诊断复核、明显血压升高的处理。无症状但复测≥180/110 时当天评估，是本页结合报告提出的就诊建议。</li><li id="s2"><a href="https://www.heart.org/en/health-topics/high-blood-pressure/understanding-blood-pressure-readings/monitoring-your-blood-pressure-at-home" target="_blank" rel="noopener noreferrer">美国心脏协会：家庭血压测量</a>。</li><li id="s3"><a href="https://www.niddk.nih.gov/health-information/kidney-disease/chronic-kidney-disease-ckd/tests-diagnosis" target="_blank" rel="noopener noreferrer">NIDDK：肾脏病的检查</a>；<a href="https://www.niddk.nih.gov/health-information/professionals/clinical-tools-patient-management/kidney-disease/identify-manage-patients/evaluate-ckd/assess-urine-albumin" target="_blank" rel="noopener noreferrer">尿白蛋白及 UACR</a>。</li><li id="s4"><a href="https://www.niddk.nih.gov/health-information/endocrine-diseases/primary-hyperparathyroidism" target="_blank" rel="noopener noreferrer">NIDDK：甲状旁腺功能亢进与血钙、PTH 检查</a>。</li></ol><p>资料核对日期：2026-11-10。本页用于解释和准备就诊，不作确诊或处方；症状和复查结果可改变优先级。正文、样式和功能均在此文件内，阅读不需要联网；参考链接联网后可打开。</p></div></details>
     <p>本页包含个人健康信息，建议仅供本人、家属与接诊医生使用。</p>
-    <a class="back" href="#top">返回顶部 ↑</a>
+    <a class="back" href="#top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5m-6 6 6-6 6 6"/></svg>返回顶部</a>
   </footer>
+  </div>
   <script>
     const fontButton=document.getElementById('font');
-    fontButton.addEventListener('click',()=>{const large=document.documentElement.classList.toggle('large');fontButton.textContent=large?'恢复字号':'放大字号';fontButton.setAttribute('aria-pressed',String(large));});
+    const fontLabel=fontButton.querySelector('.font-label');
+    const setFont=large=>{
+      document.documentElement.classList.toggle('large',large);
+      fontLabel.textContent=large?'恢复字号':'放大字号';
+      fontButton.setAttribute('aria-pressed',String(large));
+    };
+    try{setFont(localStorage.getItem('family-health-reader-font')==='large');}catch{}
+    fontButton.addEventListener('click',()=>{
+      const large=!document.documentElement.classList.contains('large');
+      setFont(large);
+      try{localStorage.setItem('family-health-reader-font',large?'large':'standard');}catch{}
+    });
     document.getElementById('print').addEventListener('click',()=>window.print());
     const storageKey='family-health-father-20261110';
     const boxes=[...document.querySelectorAll('input[type="checkbox"]')];
     try{const saved=JSON.parse(localStorage.getItem(storageKey)||'{}');boxes.forEach(box=>{box.checked=saved[box.id]===true;});}catch{}
     boxes.forEach(box=>box.addEventListener('change',()=>{try{localStorage.setItem(storageKey,JSON.stringify(Object.fromEntries(boxes.map(item=>[item.id,item.checked]))));}catch{}}));
+    const topicDetails=[...document.querySelectorAll('.topics details')];
+    const toggleAll=document.getElementById('toggle-all');
+    const syncToggle=()=>{toggleAll.textContent=topicDetails.every(item=>item.open)?'收起全部解释':'展开全部解释';};
+    toggleAll.addEventListener('click',()=>{const open=!topicDetails.every(item=>item.open);topicDetails.forEach(item=>item.open=open);syncToggle();});
+    topicDetails.forEach(item=>item.addEventListener('toggle',syncToggle));
+    const navLinks=[...document.querySelectorAll('.nav a')];
+    const sections=navLinks.map(link=>document.querySelector(link.getAttribute('href')));
+    let scrollQueued=false;
+    let lastActive=-1;
+    const updateNav=()=>{
+      const threshold=innerWidth<=760?150:160;
+      let active=0;
+      sections.forEach((section,index)=>{if(section.getBoundingClientRect().top<=threshold)active=index;});
+      navLinks.forEach((link,index)=>{if(index===active)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');});
+      if(active!==lastActive&&innerWidth<=760){const list=document.querySelector('.nav');const link=navLinks[active];list.scrollTo({left:Math.max(0,link.offsetLeft-list.offsetLeft-list.clientWidth/2+link.clientWidth/2),behavior:'auto'});}
+      lastActive=active;
+      scrollQueued=false;
+    };
+    window.addEventListener('scroll',()=>{if(!scrollQueued){scrollQueued=true;requestAnimationFrame(updateNav);}},{passive:true});
+    window.addEventListener('resize',updateNav);
+    updateNav();
     let openedBeforePrint=[];
     window.addEventListener('beforeprint',()=>{openedBeforePrint=[...document.querySelectorAll('details')].filter(item=>!item.open);openedBeforePrint.forEach(item=>item.open=true);});
     window.addEventListener('afterprint',()=>{openedBeforePrint.forEach(item=>item.open=false);openedBeforePrint=[];});
